@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     DB_NAME: str
     DB_ECHO: bool  # Временно true;
 
+    access_token_lifetime_seconds: int = 3600
+
     @property
     def db_url(self) -> PostgresDsn:
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
