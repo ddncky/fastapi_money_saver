@@ -1,8 +1,11 @@
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, Result
 from sqlalchemy.orm import DeclarativeBase
-from typing import TypeVar, Type
+from typing import TypeVar, Type, TYPE_CHECKING
 from pydantic import BaseModel
+
+
+if TYPE_CHECKING:
+    from sqlalchemy.ext.asyncio import AsyncSession
 
 
 T = TypeVar("T", bound=DeclarativeBase)  # ?
