@@ -1,5 +1,5 @@
 from fastapi_users.db import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
-from src.core.base import Base
+from core.models.base import Base
 from src.common.mixins.int_id_pk import IntIdPkMixin
 from typing import TYPE_CHECKING
 
@@ -10,5 +10,5 @@ if TYPE_CHECKING:
 class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[int]):
 
     @classmethod
-    def get_db(cls, session: AsyncSession):
+    def get_users_db(cls, session: AsyncSession):
         return SQLAlchemyUserDatabase(session, User)

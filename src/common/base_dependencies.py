@@ -1,6 +1,6 @@
 from typing import Type, TypeVar, Callable, TYPE_CHECKING
 from fastapi import Depends, HTTPException, status, Path
-from core.database import get_database
+from core.models.database import get_database
 from sqlalchemy.orm import DeclarativeBase
 from typing import Annotated
 from common.base_crud import get_item

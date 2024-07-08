@@ -5,5 +5,5 @@ __all__ = (
 )
 
 
-from .base import Base
-from .database import get_database, DatabaseHelper
+from core.models.base import Base
+from core.models.database import get_database, DatabaseHelper
