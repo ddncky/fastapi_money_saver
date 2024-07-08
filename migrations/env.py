@@ -10,6 +10,9 @@ from alembic import context
 from src.core.models.base import Base
 from src.core.config import get_settings
 
+from src.modules import User
+from src.core import AccessToken
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
