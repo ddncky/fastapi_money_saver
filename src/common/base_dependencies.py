@@ -28,7 +28,7 @@ T = TypeVar("T", bound=DeclarativeBase)
 def get_item_by_id(model: Type[T]) -> Callable:
     async def dependency(
         item_id: Annotated[int, Path],
-        session: Annotated[AsyncSession, Depends(get_database().session_dependency)]
+        session: Annotated["AsyncSession", Depends(get_database().session_dependency)]
     ) -> T:
         item = await get_item(session=session, model=model, item_id=item_id)
         if item:

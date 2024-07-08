@@ -12,7 +12,7 @@ T = TypeVar("T", bound=DeclarativeBase)  # ?
 D = TypeVar('D', bound=BaseModel)  # ?
 
 
-async def create_item(session: AsyncSession, model: Type[T], data: D) -> T:
+async def create_item(session: "AsyncSession", model: Type[T], data: D) -> T:
     item = model(**data.model_dump())
     session.add(item)
     await session.commit()
