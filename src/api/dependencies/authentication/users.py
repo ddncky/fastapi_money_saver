@@ -7,7 +7,7 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 
-async def get_user_db(
+async def get_users_db(
     session: Annotated["AsyncSession", Depends(get_database().session_dependency)]
 ):
     yield User.get_db(session=session)
