@@ -3,7 +3,10 @@ from .fastapi_users_router import fastapi_users
 from api.dependencies.authentication.backend import authentication_backend
 from src.modules.users.schemas import UserRead, UserCreate
 
-router = APIRouter(prefix="/auth", tags=["Auth"])
+router = APIRouter(
+    prefix="/auth",
+    tags=["Auth"]
+)
 
 
 # /login, /logout
