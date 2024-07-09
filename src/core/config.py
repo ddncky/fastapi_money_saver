@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     DB_ECHO: bool  # Временно true;
 
     access_token_lifetime_seconds: int = 3600
+    reset_password_token_secret: str
+    verification_token_secret: str
 
     @property
     def db_url(self) -> PostgresDsn:
