@@ -1,4 +1,4 @@
-from create_app import create_application
+from src.create_app import create_application
 import uvicorn
 
 app = create_application()
