@@ -18,5 +18,5 @@ def get_database_strategy(
 ) -> DatabaseStrategy:
     return DatabaseStrategy(
         database=access_token_db,
-        lifetime_seconds=get_settings().access_token_lifetime_seconds
+        lifetime_seconds=get_settings().access_token_lifetime_seconds # TODO: скрипт для переодической отчистки базы
     )
