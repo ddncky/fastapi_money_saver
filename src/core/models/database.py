@@ -16,7 +16,7 @@ class DatabaseHelper:
             url=url,
             echo=echo,
         )
-        self.session_factory = async_sessionmaker(
+        self.session_factory: async_sessionmaker[AsyncSession] = async_sessionmaker(
             bind=self.engine,
             autocommit=False,
             autoflush=False,
