@@ -1,5 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import PostgresDsn
+from pydantic import PostgresDsn, BaseModel
 from functools import lru_cache
 from dotenv import load_dotenv, find_dotenv
 
@@ -19,6 +19,12 @@ class Settings(BaseSettings):
     access_token_lifetime_seconds: int = 3600
     reset_password_token_secret: str
     verification_token_secret: str
+
+    default_superuser_email: str
+    default_superuser_password: str
+    default_superuser_is_active: bool
+    default_superuser_is_superuser: bool
+    default_superuser_is_verified: bool
 
     @property
     def db_url(self) -> PostgresDsn:
