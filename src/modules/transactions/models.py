@@ -1,6 +1,8 @@
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from sqlalchemy import Integer, Float, String, DateTime, ForeignKey, Enum
 from datetime import datetime
+
+from src.common.mixins import IntIdPkMixin
 from src.core import Base
 import enum
 from typing import TYPE_CHECKING
@@ -16,10 +18,9 @@ class TransactionType(enum.Enum):
     expense = "expense"
 
 
-class Transaction(Base):
+class Transaction(IntIdPkMixin, Base):
     __tablename__ = "transactions"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     amount: Mapped[float] = mapped_column(Float, nullable=False)
     description: Mapped[str] = mapped_column(String(100))
     date: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
