@@ -20,11 +20,11 @@ async def create_item(session: "AsyncSession", model: Type[T], data: D) -> T:
     return item
 
 
-async def get_item(session: AsyncSession, model: Type[T], item_id: int) -> T | None:
+async def get_item(session: "AsyncSession", model: Type[T], item_id: int) -> T | None:
     return await session.get(model, item_id)
 
 
-async def get_items(session: AsyncSession, model: Type[T]) -> list[T]:
+async def get_items(session: "AsyncSession", model: Type[T]) -> list[T]:
     stmt = select(model).order_by(model.id)
     result: Result = await session.execute(stmt)
     items = result.scalars().all()
@@ -33,7 +33,7 @@ async def get_items(session: AsyncSession, model: Type[T]) -> list[T]:
 
 
 async def update_item(
-        session: AsyncSession,
+        session: "AsyncSession",
         item: T,
         data: D,
         partial: bool = False
@@ -45,6 +45,6 @@ async def update_item(
     return item
 
 
-async def delete_item(session: AsyncSession, item: T) -> None:
+async def delete_item(session: "AsyncSession", item: T) -> None:
     await session.delete(item)
     await session.commit()

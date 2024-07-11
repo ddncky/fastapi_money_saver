@@ -1,9 +1,9 @@
 from typing import Type, TypeVar, Callable, TYPE_CHECKING
 from fastapi import Depends, HTTPException, status, Path
-from core.models.database import get_database
+from src.core.models.database import get_database
 from sqlalchemy.orm import DeclarativeBase
 from typing import Annotated
-from common.base_crud import get_item
+from src.common.base_crud import get_item
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
