@@ -7,8 +7,12 @@ class AccountBase(BaseModel):
     balance: float
 
 
-class AccountCreate(AccountBase):
+class AccountCreateInput(AccountBase):
     pass
+
+
+class AccountCreate(AccountBase):
+    user_id: int
 
 
 class AccountUpdate(AccountBase):

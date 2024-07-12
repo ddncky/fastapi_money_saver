@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from src.api.views import router as account_router
+from src.modules.accounts.views import router as account_router
 
 
 

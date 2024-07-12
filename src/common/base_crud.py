@@ -8,8 +8,8 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 
-T = TypeVar("T", bound=DeclarativeBase)  # ?
-D = TypeVar('D', bound=BaseModel)  # ?
+T = TypeVar("T", bound=DeclarativeBase)
+D = TypeVar('D', bound=BaseModel)
 
 
 async def create_item(session: "AsyncSession", model: Type[T], data: D) -> T:
