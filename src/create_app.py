@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
 from src.api import router as api_router
-from src.modules import modules_router
+#from src.modules import modules_router
+from src.modules.router import modules_router
 
 
 def create_application() -> FastAPI:
