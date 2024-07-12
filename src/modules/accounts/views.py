@@ -27,7 +27,7 @@ router = APIRouter(prefix="/accounts", tags=["Accounts"])
 @router.post("/", response_model=AccountRead, status_code=status.HTTP_201_CREATED)
 async def create_account(
         account_in: AccountCreateInput,
-        user: Annotated[User, Depends(current_active_superuser)],
+        user: Annotated[User, Depends(current_active_user)],
         session: AsyncSession = Depends(get_database().session_dependency),
 ):
     return await crud.create_account(session=session, model=Account, data=account_in, user_id=user.id)
@@ -71,7 +71,7 @@ async def update_account_partially(
         session=session,
         item=account,
         data=account_update,
-        partual=partial
+        partial=partial
     )
 
 
