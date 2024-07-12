@@ -1,8 +1,8 @@
-"""Initial again
+"""Initall again
 
-Revision ID: d9d4a8d70b65
+Revision ID: 12c466688017
 Revises: 
-Create Date: 2024-07-11 12:04:26.991456
+Create Date: 2024-07-12 13:38:00.612696
 
 """
 
@@ -14,7 +14,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "d9d4a8d70b65"
+revision: str = "12c466688017"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -25,7 +25,7 @@ def upgrade() -> None:
     op.create_table(
         "categories",
         sa.Column("name", sa.String(length=100), nullable=False),
-        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("name"),
     )
@@ -36,7 +36,7 @@ def upgrade() -> None:
             fastapi_users_db_sqlalchemy.generics.TIMESTAMPAware(timezone=True),
             nullable=False,
         ),
-        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
         sa.Column("email", sa.String(length=320), nullable=False),
         sa.Column("hashed_password", sa.String(length=1024), nullable=False),
         sa.Column("is_active", sa.Boolean(), nullable=False),
@@ -72,7 +72,7 @@ def upgrade() -> None:
         sa.Column("balance", sa.Float(), nullable=False),
         sa.Column("user_id", sa.Integer(), nullable=False),
         sa.Column("created_at", sa.DateTime(), nullable=False),
-        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
         sa.ForeignKeyConstraint(
             ["user_id"],
             ["users.id"],
@@ -91,7 +91,7 @@ def upgrade() -> None:
         ),
         sa.Column("account_id", sa.Integer(), nullable=False),
         sa.Column("category_id", sa.Integer(), nullable=False),
-        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
         sa.ForeignKeyConstraint(
             ["account_id"],
             ["accounts.id"],
