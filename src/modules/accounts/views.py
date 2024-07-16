@@ -40,6 +40,14 @@ async def get_accounts(
     return await bs.get_items(session=session, model=Account)
 
 
+@router.get("/me/", response_model=list[AccountRead])
+async def get_user_accounts(
+        user: Annotated[User, Depends(current_active_user)],
+        session: Annotated["AsyncSession", Depends(get_database().session_dependency)],
+):
+    return await crud.get_accounts_by_current_user(session=session, model=Account, user_id=user.id)
+
+
 @router.get("/{account_id}/", response_model=Optional[AccountRead])
 async def get_account(
         account: Account = Depends(bd.get_item_by_id(Account)),
