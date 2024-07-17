@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
     from src.modules import Account
+    from src.modules import Category
 
 
 class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[int]):
@@ -20,6 +21,7 @@ class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[int]):
     )
 
     accounts: Mapped[list["Account"]] = relationship("Account", back_populates="users")
+    categories: Mapped[list["Category"]] = relationship("Category", back_populates="users")
 
     @classmethod
     def get_db(cls, session: "AsyncSession"):
