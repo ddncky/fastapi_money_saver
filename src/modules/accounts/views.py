@@ -7,7 +7,7 @@ from src.api.auth_routers.fastapi_users_router import (
     current_active_superuser,
     current_active_user,
 )
-from src.common import base_crud as bs
+from src.common import base_crud as bc
 from src.core import get_database
 from src.modules import User
 from src.modules.accounts import crud
@@ -37,7 +37,7 @@ async def create_account(
 async def get_accounts(
         session: AsyncSession = Depends(get_database().session_dependency)
 ):
-    return await bs.get_items(session=session, model=Account)
+    return await bc.get_items(session=session, model=Account)
 
 
 @router.get("/me/", response_model=list[AccountRead])
@@ -45,7 +45,7 @@ async def get_user_accounts(
         user: Annotated[User, Depends(current_active_user)],
         session: Annotated["AsyncSession", Depends(get_database().session_dependency)],
 ):
-    return await crud.get_accounts_by_current_user(session=session, model=Account, user_id=user.id)
+    return await bc.get_items_by_current_user(session=session, model=Account, user_id=user.id)
 
 
 @router.get("/{account_id}/", response_model=Optional[AccountRead])
@@ -61,7 +61,7 @@ async def update_account(
         account: Account = Depends(get_account_and_check_permissions),
         session: AsyncSession = Depends(get_database().session_dependency)
 ):
-    return await bs.update_item(
+    return await bc.update_item(
         session=session,
         item=account,
         data=account_update
@@ -75,7 +75,7 @@ async def update_account_partially(
         session: AsyncSession = Depends(get_database().session_dependency),
         partial: bool = True
 ):
-    return await bs.update_item(
+    return await bc.update_item(
         session=session,
         item=account,
         data=account_update,
@@ -88,6 +88,6 @@ async def delete_account(
         account: Account = Depends(get_account_and_check_permissions),
         session: AsyncSession = Depends(get_database().session_dependency)
 ) -> str:
-    await bs.delete_item(session=session, item=account)
+    await bc.delete_item(session=session, item=account)
     return f"Account with id {account.id} was succesfully deleted!"
 

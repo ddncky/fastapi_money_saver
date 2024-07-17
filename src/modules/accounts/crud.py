@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy import select, Result
 from src.common import base_crud as bs
 from typing import TYPE_CHECKING, TypeVar, Type
 from src.modules.accounts.schemas import AccountCreate
@@ -19,9 +18,3 @@ async def create_account(session: "AsyncSession", model: Type[T], data: D, user_
     return await bs.create_item(session=session, model=model, data=account_data)
 
 
-async def get_accounts_by_current_user(session: "AsyncSession", model: Type[T], user_id: int) -> list[T]:
-    stmt = select(model).where(model.user_id == user_id)
-    result: Result = await session.execute(stmt)
-    accounts = result.scalars().all()
-
-    return list(accounts)
