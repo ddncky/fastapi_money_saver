@@ -5,8 +5,12 @@ class CategoryBase(BaseModel):
     name: str
 
 
-class CategoryCreate(CategoryBase):
+class CategoryCreateInput(CategoryBase):
     pass
+
+
+class CategoryCreate(CategoryBase):
+    user_id: int
 
 
 class CategoryUpdate(CategoryBase):
