@@ -20,6 +20,14 @@ async def create_item(session: "AsyncSession", model: Type[T], data: D) -> T:
     return item
 
 
+async def get_items_by_current_user(session: "AsyncSession", model: Type[T], user_id: int) -> list[T]:
+    stmt = select(model).where(model.user_id == user_id)
+    result: Result = await session.execute(stmt)
+    items = result.scalars().all()
+
+    return list(items)
+
+
 async def get_item(session: "AsyncSession", model: Type[T], item_id: int) -> T | None:
     return await session.get(model, item_id)
 
