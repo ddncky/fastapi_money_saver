@@ -57,7 +57,7 @@ async def update_category_partially(
         session=session,
         item=category,
         data=category_update,
-        partual=partial
+        partial=partial
     )
 
 
