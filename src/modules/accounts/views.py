@@ -1,4 +1,3 @@
-import logging
 from typing import Annotated, Optional
 
 from fastapi import APIRouter, Depends, status
@@ -9,7 +8,6 @@ from src.api.auth_routers.fastapi_users_router import (
     current_active_user,
 )
 from src.common import base_crud as bs
-from src.common import base_dependencies as bd
 from src.core import get_database
 from src.modules import User
 from src.modules.accounts import crud
@@ -20,6 +18,8 @@ from src.modules.accounts.schemas import (
     AccountUpdate,
     AccountUpdatePartially,
 )
+
+from .dependencies import get_account_and_check_permissions
 
 router = APIRouter(prefix="/accounts", tags=["Accounts"])
 
@@ -33,7 +33,7 @@ async def create_account(
     return await crud.create_account(session=session, model=Account, data=account_in, user_id=user.id)
 
 
-@router.get("/", response_model=list[AccountRead])
+@router.get("/", response_model=list[AccountRead], dependencies=[Depends(current_active_superuser)])
 async def get_accounts(
         session: AsyncSession = Depends(get_database().session_dependency)
 ):
@@ -50,7 +50,7 @@ async def get_user_accounts(
 
 @router.get("/{account_id}/", response_model=Optional[AccountRead])
 async def get_account(
-        account: Account = Depends(bd.get_item_by_id(Account)),
+        account: Account = Depends(get_account_and_check_permissions),
 ):
     return account
 
@@ -58,7 +58,7 @@ async def get_account(
 @router.put("/{account_id}/", response_model=AccountRead)
 async def update_account(
         account_update: AccountUpdate,
-        account: Account = Depends(bd.get_item_by_id(Account)),
+        account: Account = Depends(get_account_and_check_permissions),
         session: AsyncSession = Depends(get_database().session_dependency)
 ):
     return await bs.update_item(
@@ -71,7 +71,7 @@ async def update_account(
 @router.patch("/{account_id}/", response_model=AccountRead)
 async def update_account_partially(
         account_update: AccountUpdatePartially,
-        account: Account = Depends(bd.get_item_by_id(Account)),
+        account: Account = Depends(get_account_and_check_permissions),
         session: AsyncSession = Depends(get_database().session_dependency),
         partial: bool = True
 ):
@@ -85,14 +85,9 @@ async def update_account_partially(
 
 @router.delete("/{account_id}/")
 async def delete_account(
-        account: Account = Depends(bd.get_item_by_id(Account)),
+        account: Account = Depends(get_account_and_check_permissions),
         session: AsyncSession = Depends(get_database().session_dependency)
-) -> None:
+) -> str:
     await bs.delete_item(session=session, item=account)
-
-
-
-
-
-
+    return f"Account with id {account.id} was succesfully deleted!"
 
