@@ -10,7 +10,6 @@ from .models import Category
 from src.core import get_database
 from src.common import base_crud as bs
 from typing import Optional, Annotated, TYPE_CHECKING
-from src.common import base_dependencies as bd
 from src.common import base_crud as bc
 from . import crud
 from . dependencies import (

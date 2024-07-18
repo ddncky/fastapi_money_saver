@@ -41,7 +41,7 @@ async def is_category_owner_or_superuser(
 async def get_category_and_check_permissions_only_for_getting_ids(
     category_id: Annotated[int, Path],
     session: "AsyncSession" = Depends(get_database().session_dependency),
-    current_user: User = Depends(current_active_user)
+    current_user: "User" = Depends(current_active_user)
 ) -> Category:
     """This function and two above were created to be able to retrieve categories created
     by current (not super) user and base categories"""
@@ -53,7 +53,7 @@ async def get_category_and_check_permissions_only_for_getting_ids(
 async def get_category_and_check_permissions(
     category_id: Annotated[int, Path],
     session: "AsyncSession" = Depends(get_database().session_dependency),
-    current_user: User = Depends(current_active_user)
+    current_user: "User" = Depends(current_active_user)
 ) -> Category:
     await bd.is_item_owner_or_superuser(Category)(category_id, current_user, session)
     category = await bd.get_item_by_id(Category)(category_id, session)
