@@ -22,6 +22,7 @@ from .schemas import (
     TransactionUpdate,
     TransactionUpdatePartially,
 )
+from fastapi_cache.decorator import cache
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
@@ -54,6 +55,7 @@ async def get_transactions(
 
 
 @router.get("/me/", response_model=list[TransactionRead])
+@cache(expire=30)
 async def get_user_transactions(
         user: Annotated["User", Depends(current_active_user)],
         session: Annotated["AsyncSession", Depends(get_database().session_dependency)],
