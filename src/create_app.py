@@ -29,7 +29,9 @@ def create_application() -> FastAPI:
         "http://localhost.tiangolo.com",
         "https://localhost.tiangolo.com",
         "http://localhost",
-        "http://localhost:8080",
+        "http://localhost:8080"
+        "http://localhost:9000"
+        ,
     ]
     application.add_middleware(
         CORSMiddleware,
