@@ -5,6 +5,7 @@ from fastapi_users import BaseUserManager, IntegerIDMixin
 from src.core import get_settings
 
 from src.modules import User
+from src.tasks.tasks import send_registration_confirmation_email
 
 log = logging.getLogger(__name__)
 
@@ -18,6 +19,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
 
     async def on_after_register(self, user: User, request: Optional["Request"] = None):
         log.warning("User %r has registered.", user.id)
+        send_registration_confirmation_email.delay(user.email)
 
     async def on_after_forgot_password(
             self, user: User, token: str, request: Optional["Request"] = None
