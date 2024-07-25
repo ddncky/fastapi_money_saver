@@ -10,11 +10,12 @@ from redis import asyncio as aioredis
 
 from src.api import router as api_router
 from src.modules.router import modules_router
+from src.core import get_settings
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
-    redis = aioredis.from_url("redis://localhost")
+    redis = aioredis.from_url(f"redis://{get_settings().REDIS_HOST}")
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
     yield
 
