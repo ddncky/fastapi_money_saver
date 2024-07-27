@@ -19,3 +19,6 @@ class Category(IntIdPkMixin, Base):
 
     transactions: Mapped[list["Transaction"]] = relationship("Transaction", back_populates="categories")
     users: Mapped["User"] = relationship("User", back_populates="categories")
+
+    def __str__(self):
+        return f"Category #{self.id} {self.name}"

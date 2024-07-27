@@ -30,3 +30,6 @@ class Transaction(IntIdPkMixin, Base):
 
     accounts: Mapped["Account"] = relationship("Account", back_populates="transactions")
     categories: Mapped["Category"] = relationship("Category", back_populates="transactions")
+
+    def __str__(self):
+        return f"Transaction #{self.id}"

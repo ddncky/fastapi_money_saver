@@ -23,6 +23,9 @@ class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[int]):
     accounts: Mapped[list["Account"]] = relationship("Account", back_populates="users")
     categories: Mapped[list["Category"]] = relationship("Category", back_populates="users")
 
+    def __str__(self):
+        return f"User #{self.id} {self.email}"
+
     @classmethod
     def get_db(cls, session: "AsyncSession"):
         return SQLAlchemyUserDatabase(session, User)

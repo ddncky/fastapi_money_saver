@@ -22,3 +22,6 @@ class Account(IntIdPkMixin, Base):
 
     users: Mapped["User"] = relationship("User", back_populates="accounts")
     transactions: Mapped[list["Transaction"]] = relationship("Transaction", back_populates="accounts")
+
+    def __str__(self):
+        return f"Account #{self.id} {self.name}"
