@@ -1,13 +1,16 @@
 import logging
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 from fastapi_users import BaseUserManager, IntegerIDMixin
-from src.core import get_settings
 
+from src.common.log_config import configure_logging
+from src.core import get_settings
 from src.modules import User
 from src.tasks.tasks import send_registration_confirmation_email
 
 log = logging.getLogger(__name__)
+configure_logging(level=logging.WARNING)
+
 
 if TYPE_CHECKING:
     from fastapi import Request
