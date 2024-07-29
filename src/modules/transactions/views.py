@@ -1,6 +1,7 @@
 from typing import TYPE_CHECKING, Annotated, Optional
 
 from fastapi import APIRouter, Depends, status
+from fastapi_cache.decorator import cache
 
 import src.modules.transactions.crud as crud
 from src.api.auth_routers.fastapi_users_router import (
@@ -22,10 +23,10 @@ from .schemas import (
     TransactionUpdate,
     TransactionUpdatePartially,
 )
-from fastapi_cache.decorator import cache
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
+
     from src.modules import Account, Category, User
 
 router = APIRouter(prefix="/transactions", tags=["Transactions"])

@@ -1,4 +1,5 @@
 from celery import Celery
+
 from src.core import get_settings
 
 celery = Celery(

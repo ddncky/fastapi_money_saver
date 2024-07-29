@@ -1,5 +1,7 @@
 from typing import TYPE_CHECKING, Annotated
+
 from fastapi import Depends
+
 from src.core import get_database
 from src.modules import User
 

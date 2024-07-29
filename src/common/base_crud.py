@@ -1,8 +1,8 @@
-from sqlalchemy import select, Result
-from sqlalchemy.orm import DeclarativeBase
-from typing import TypeVar, Type, TYPE_CHECKING
-from pydantic import BaseModel
+from typing import TYPE_CHECKING, Type, TypeVar
 
+from pydantic import BaseModel
+from sqlalchemy import Result, select
+from sqlalchemy.orm import DeclarativeBase
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

@@ -1,18 +1,17 @@
 import datetime
+from typing import TYPE_CHECKING
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
 from fastapi_users_db_sqlalchemy.generics import TIMESTAMPAware, now_utc
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.core import Base
 from src.common.mixins import IntIdPkMixin
-from typing import TYPE_CHECKING
-
+from src.core import Base
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
-    from src.modules import Account
-    from src.modules import Category
+
+    from src.modules import Account, Category
 
 
 class User(Base, IntIdPkMixin, SQLAlchemyBaseUserTable[int]):

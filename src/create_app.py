@@ -9,8 +9,8 @@ from fastapi_cache.backends.redis import RedisBackend
 from redis import asyncio as aioredis
 
 from src.api import router as api_router
-from src.modules.router import modules_router
 from src.core import get_settings
+from src.modules.router import modules_router
 
 
 @asynccontextmanager

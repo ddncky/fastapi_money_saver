@@ -1,14 +1,13 @@
-from sqlalchemy.orm import relationship, Mapped, mapped_column
-from sqlalchemy import Integer, String, ForeignKey
+from typing import TYPE_CHECKING
+
+from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.common.mixins import IntIdPkMixin
 from src.core import Base
-from typing import TYPE_CHECKING
-
 
 if TYPE_CHECKING:
-    from src.modules import Transaction
-    from src.modules import User
+    from src.modules import Transaction, User
 
 
 class Category(IntIdPkMixin, Base):

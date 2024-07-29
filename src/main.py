@@ -1,10 +1,10 @@
-from src.create_app import create_application
 import uvicorn
 from sqladmin import Admin
-from src.core import get_database
-from src.admin.models import UserAdmin, AccountAdmin, CategoryAdmin, TransactionAdmin
-from src.admin.auth import authentication_backend
 
+from src.admin.auth import authentication_backend
+from src.admin.models import AccountAdmin, CategoryAdmin, TransactionAdmin, UserAdmin
+from src.core import get_database
+from src.create_app import create_application
 
 app = create_application()
 

@@ -1,8 +1,9 @@
+import asyncio
+
+from src.common.base_crud import create_item
 from src.core import get_database
 from src.modules.categories import Category
 from src.modules.categories.schemas import CategoryCreateInput
-from src.common.base_crud import create_item
-import asyncio
 
 
 def base_categories():

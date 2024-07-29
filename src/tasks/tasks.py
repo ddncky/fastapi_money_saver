@@ -1,7 +1,9 @@
-from .celery_client import celery
-from src.core import get_settings
-from .email_templates import create_registration_confirmation_template
 import smtplib
+
+from src.core import get_settings
+
+from .celery_client import celery
+from .email_templates import create_registration_confirmation_template
 
 
 @celery.task

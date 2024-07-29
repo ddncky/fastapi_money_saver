@@ -1,9 +1,12 @@
+from typing import TYPE_CHECKING, Type, TypeVar
+
 from pydantic import BaseModel
+from sqlalchemy import Result, select
 from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy import select, Result
-from typing import TYPE_CHECKING, TypeVar, Type
-from . schemas import CategoryCreate
+
 from src.common import base_crud as bs
+
+from .schemas import CategoryCreate
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

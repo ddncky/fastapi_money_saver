@@ -1,14 +1,13 @@
 import asyncio
 import contextlib
 import logging
-
-from src.core import get_database
-from src.modules.users.schemas import UserCreate
-from src.api.dependencies.authentication.user_manager import get_user_manager
-from src.core.authentication.user_manager import UserManager
-from src.api.dependencies.authentication.users import get_users_db
 from typing import TYPE_CHECKING
-from src.core import get_settings
+
+from src.api.dependencies.authentication.user_manager import get_user_manager
+from src.api.dependencies.authentication.users import get_users_db
+from src.core import get_database, get_settings
+from src.core.authentication.user_manager import UserManager
+from src.modules.users.schemas import UserCreate
 
 log = logging.getLogger(__name__)
 

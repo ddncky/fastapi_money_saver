@@ -1,11 +1,10 @@
 from typing import Annotated
 
-from fastapi import APIRouter
-from fastapi import Depends
+from fastapi import APIRouter, Depends
 
 from src.api.auth_routers.fastapi_users_router import (
-    current_active_user,
     current_active_superuser,
+    current_active_user,
 )
 from src.modules import User
 from src.modules.users.schemas import UserRead

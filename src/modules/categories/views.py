@@ -1,24 +1,32 @@
+from typing import TYPE_CHECKING, Annotated, Optional
+
 from fastapi import APIRouter, Depends, status
 
-from src.api.auth_routers.fastapi_users_router import current_active_user, current_active_superuser
+from src.api.auth_routers.fastapi_users_router import (
+    current_active_superuser,
+    current_active_user,
+)
+from src.common import base_crud as bc
+from src.common import base_crud as bs
+from src.core import get_database
+
+from . import crud
+from .dependencies import (
+    get_category_and_check_permissions,
+    get_category_and_check_permissions_only_for_getting_ids,
+)
+from .models import Category
 from .schemas import (
+    CategoryCreateInput,
+    CategoryRead,
     CategoryUpdate,
     CategoryUpdatePartially,
-    CategoryRead,
-    CategoryCreateInput)
-from .models import Category
-from src.core import get_database
-from src.common import base_crud as bs
-from typing import Optional, Annotated, TYPE_CHECKING
-from src.common import base_crud as bc
-from . import crud
-from . dependencies import (
-    get_category_and_check_permissions_only_for_getting_ids,
-    get_category_and_check_permissions
 )
+
 if TYPE_CHECKING:
-    from src.modules import User
     from sqlalchemy.ext.asyncio import AsyncSession
+
+    from src.modules import User
 
 
 router = APIRouter(prefix="/categories", tags=["Categories"])

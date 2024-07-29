@@ -1,7 +1,9 @@
+from typing import TYPE_CHECKING, Type, TypeVar
+
 from pydantic import BaseModel
 from sqlalchemy.orm import DeclarativeBase
+
 from src.common import base_crud as bs
-from typing import TYPE_CHECKING, TypeVar, Type
 from src.modules.accounts.schemas import AccountCreate
 
 if TYPE_CHECKING:

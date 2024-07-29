@@ -1,6 +1,8 @@
 from fastapi import APIRouter
-from .fastapi_users_router import fastapi_users_inst
+
 from src.modules.users.schemas import UserRead, UserUpdate
+
+from .fastapi_users_router import fastapi_users_inst
 
 router = APIRouter(
     prefix="/users",

@@ -1,14 +1,16 @@
-from typing import Type, TypeVar, Callable, TYPE_CHECKING, Annotated
-from fastapi import Depends, HTTPException, status, Path
+from typing import TYPE_CHECKING, Annotated, Callable, Type, TypeVar
+
+from fastapi import Depends, HTTPException, Path, status
+from sqlalchemy import select
+from sqlalchemy.orm import DeclarativeBase
 
 from src.api.auth_routers.fastapi_users_router import current_active_user
-from src.core.models.database import get_database
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy import select
 from src.common.base_crud import get_item
+from src.core.models.database import get_database
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
+
     from src.modules import User
 
 T = TypeVar("T", bound=DeclarativeBase)

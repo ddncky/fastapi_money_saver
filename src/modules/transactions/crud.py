@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, TypeVar, Sequence
+from typing import TYPE_CHECKING, Sequence, TypeVar
 
 from pydantic import BaseModel
 from sqlalchemy import select

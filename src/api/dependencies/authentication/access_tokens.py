@@ -1,7 +1,8 @@
 from typing import TYPE_CHECKING, Annotated
+
 from fastapi import Depends
-from src.core import get_database
-from src.core import AccessToken
+
+from src.core import AccessToken, get_database
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

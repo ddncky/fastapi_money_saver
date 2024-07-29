@@ -1,15 +1,14 @@
 from datetime import datetime
-from sqlalchemy.orm import mapped_column, Mapped, relationship
-from sqlalchemy import Integer, String, DateTime, Float, ForeignKey
+from typing import TYPE_CHECKING
+
+from sqlalchemy import DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.common.mixins import IntIdPkMixin
 from src.core import Base
-from typing import TYPE_CHECKING
-
 
 if TYPE_CHECKING:
-    from src.modules import User
-    from src.modules import Transaction
+    from src.modules import Transaction, User
 
 
 class Account(IntIdPkMixin, Base):

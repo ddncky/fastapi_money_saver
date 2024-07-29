@@ -1,16 +1,15 @@
-from sqlalchemy.orm import relationship, Mapped, mapped_column
-from sqlalchemy import Integer, Float, String, DateTime, ForeignKey, Enum
+import enum
 from datetime import datetime
+from typing import TYPE_CHECKING
+
+from sqlalchemy import DateTime, Enum, Float, ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.common.mixins import IntIdPkMixin
 from src.core import Base
-import enum
-from typing import TYPE_CHECKING
-
 
 if TYPE_CHECKING:
-    from src.modules import Account
-    from src.modules import Category
+    from src.modules import Account, Category
 
 
 class TransactionType(enum.Enum):

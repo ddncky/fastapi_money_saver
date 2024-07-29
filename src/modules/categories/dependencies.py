@@ -1,15 +1,19 @@
-from fastapi import Depends, Path, HTTPException, status
-from src.modules import User
+from typing import TYPE_CHECKING, Annotated
+
+from fastapi import Depends, HTTPException, Path, status
+from sqlalchemy import and_, or_, select
+
 from src.api.auth_routers.fastapi_users_router import current_active_user
-from sqlalchemy import select, and_, or_
-from typing import Annotated, TYPE_CHECKING
-from src.core import get_database
-from . import Category
 from src.common import base_dependencies as bd
+from src.core import get_database
+from src.modules import User
+
+from . import Category
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
-    from . models import User
+
+    from .models import User
 
 
 async def get_user_categories_ids(

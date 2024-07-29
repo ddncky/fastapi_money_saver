@@ -5,7 +5,7 @@ __all__ = (
     "Transaction",
 )
 
-from .users import User
 from .accounts import Account
 from .categories import Category
 from .transactions import Transaction
+from .users import User

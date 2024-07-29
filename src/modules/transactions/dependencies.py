@@ -1,14 +1,18 @@
-from fastapi import Depends, Path, HTTPException, status
-from src.api.auth_routers.fastapi_users_router import current_active_user
+from typing import TYPE_CHECKING, Annotated
+
+from fastapi import Depends, HTTPException, Path, status
 from sqlalchemy import select
-from typing import Annotated, TYPE_CHECKING
-from src.core import get_database
-from . import Transaction
-from src.modules import Account
+
+from src.api.auth_routers.fastapi_users_router import current_active_user
 from src.common import base_dependencies as bd
+from src.core import get_database
+from src.modules import Account
+
+from . import Transaction
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
+
     from src.modules import User
 
 
